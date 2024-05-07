@@ -5,6 +5,7 @@ import { CostumInputComponent } from './components/costum-input/costum-input.com
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoComponent } from './components/logo/logo.component';
+import { AddUpdateProductComponent } from './components/add-update-product/add-update-product.component';
 
 
 
@@ -12,13 +13,15 @@ import { LogoComponent } from './components/logo/logo.component';
   declarations: [
     HeaderComponent,
     CostumInputComponent,
-    LogoComponent
+    LogoComponent,
+    AddUpdateProductComponent
   ],
   exports:[
     HeaderComponent,
     CostumInputComponent,
     LogoComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AddUpdateProductComponent
   ],
   imports: [
     CommonModule,

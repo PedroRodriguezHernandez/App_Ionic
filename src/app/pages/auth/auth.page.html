@@ -11,7 +11,7 @@
         <div *ngIf="form.controls.email.errors?.['email']">Ingrese un correo valido</div>
       </div>
 
-      <app-costum-input icon="mail-outline" [control]="form.controls.password" type="password" label="Contraseña"></app-costum-input>
+      <app-costum-input icon="lock-closed-outline" [control]="form.controls.password" type="password" label="Contraseña"></app-costum-input>
 
       <div class="validate" *ngIf="form.controls.password.errors && form.controls.password.touched">
         <div *ngIf="form.controls.password.errors?.['required']">La contraseña es necesaria</div>

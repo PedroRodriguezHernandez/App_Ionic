@@ -1,4 +1,4 @@
-<app-header title="SignUp"></app-header>
+<app-header backButton="/auth" title="SignUp"></app-header>
 <ion-content >
   <div class="d-flex-center">
     <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
@@ -6,21 +6,21 @@
 
       <app-costum-input icon="person-outline" autocomplete="name" [control]="form.controls.name" type="text" label="Nombre"></app-costum-input>
 
-      <div class="validate" *ngIf="form.controls.name.errors && form.controls.name.touched">
+      <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
         <div *ngIf="form.controls.name.errors?.['required']">El nombre es necesario</div>
         <div *ngIf="form.controls.name.errors?.['midlenght']">El nombre debe tener minimo tres caracteres</div>
       </div>
 
       <app-costum-input icon="mail-outline" autocomplete="email" [control]="form.controls.email" type="email" label="Correo"></app-costum-input>
 
-      <div class="validate" *ngIf="form.controls.email.errors && form.controls.email.touched">
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
         <div *ngIf="form.controls.email.errors?.['required']">El correo es necesario</div>
         <div *ngIf="form.controls.email.errors?.['email']">Ingrese un correo valido</div>
       </div>
 
-      <app-costum-input icon="mail-outline" [control]="form.controls.password" type="password" label="Contraseña"></app-costum-input>
+      <app-costum-input icon="lock-closed-outline" [control]="form.controls.password" type="password" label="Contraseña"></app-costum-input>
 
-      <div class="validate" *ngIf="form.controls.password.errors && form.controls.password.touched">
+      <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
         <div *ngIf="form.controls.password.errors?.['required']">La contraseña es necesaria</div>
       </div>
 
