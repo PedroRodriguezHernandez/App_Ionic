@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
@@ -22,20 +23,45 @@ export class AddUpdateProductComponent  implements OnInit {
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
 
+  user = {} as User;
+
+
   ngOnInit() {
+
+    this.user = this.utilsService.getLocalStorage('user');
   }
 
-  async submit(){
+  async takeImage(){
+    const dataUrl = (await this.utilsService.takePicture('Imagen del producto')).dataUrl;
+    this.form.controls.image.setValue(dataUrl);
+  }
+
+
+  async createPublication(){
     if(this.form.valid){
+
+      let path = 'publicaction';
+      let dataUrl = this.form.value.image;
+      let imagePath = `${uuidv4()}`
+      let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
+      this.form.controls.image.setValue(imageUrl);
 
       const loading = await this.utilsService.loading();
       await loading.present();
 
-      this.firebaseService.signUp(this.form.value as User)
+      delete this.form.value.id;
+      this.firebaseService.addDocument(path, this.form.value)
       .then( async request => {
-        await this.firebaseService.updateUser(this.form.value.name)
 
-        let uid = request.user.uid;
+        this.utilsService.dismisModal({success: true});
+
+        this.utilsService.presentToast({
+          message: `Prublicación subida correctamente`,
+          duration: 1500,
+          color: 'succes',
+          position:'middle',
+          icon:'checkmark-circle-outline'
+        })        
 
       }).catch(error =>{
         console.log(error);

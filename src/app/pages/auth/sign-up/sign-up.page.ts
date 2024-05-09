@@ -29,11 +29,11 @@ export class SignUpPage implements OnInit {
 
       const loading = await this.utilsService.loading();
       await loading.present();
-
-      this.firebaseService.signUp(this.form.value as User)
+      
+      await this.firebaseService.signUp(this.form.value as User)
       .then( async request => {
-        await this.firebaseService.updateUser(this.form.value.name)
 
+        await this.firebaseService.updateUser(this.form.value.name)
         let uid = request.user.uid;
         this.form.controls.uid.setValue(uid);
         this.setUserInfo(uid);
@@ -63,9 +63,11 @@ export class SignUpPage implements OnInit {
       delete this.form.value.password;
       this.firebaseService.setDocument(path, this.form.value)
       .then( async request => {
-       this.utilsService.saveLocalStorage('user', this.form.value.uid);
-       this.utilsService.routerLink('/main/home');
-       this.form.reset();
+        console.log(request);
+        
+        this.utilsService.saveLocalStorage('user', this.form.value.uid);
+        this.utilsService.routerLink('/main/home');
+        this.form.reset();
       }).catch(error =>{
         console.log(error);
         this.utilsService.presentToast({
