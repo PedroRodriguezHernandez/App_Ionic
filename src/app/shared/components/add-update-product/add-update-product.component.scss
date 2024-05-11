@@ -9,3 +9,9 @@ ion-avatar{
   --border-radius: 15px;
   margin: 0 auto;
 }
+
+.custom-textarea textarea{
+  min-height: 200px;
+  font-size: 16px;
+  overflow-y: auto;
+}

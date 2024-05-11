@@ -22,7 +22,7 @@
         </div>
 
 
-        <app-costum-input autocomplete="description" [control]="form.controls.description" type="text" label="Descripción"></app-costum-input>
+        <app-costum-input class="custom-textarea" autocomplete="description" [control]="form.controls.description" type="text" label="Descripción"></app-costum-input>
         
         <div class="validators" *ngIf="form.controls.description.errors && form.controls.description.touched">
             <div *ngIf="form.controls.description.errors?.['required']">La descripción es necesario</div>
