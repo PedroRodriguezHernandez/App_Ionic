@@ -120,6 +120,34 @@ ion-button {
     }
 }
 
+.publication-data {
+   
+    img {
+        display: block;
+        margin: 10px auto; 
+        margin-top: 10px;
+        max-width: 100%; 
+        height: 25vh;
+      }
+    .scrollable-list {
+        margin: 10px 10px;
+        border: 1px solid black;
+        max-height: 200px; // Ajusta esta altura según sea necesario
+        overflow-y: auto; // Habilita el desplazamiento vertical
+    }
+    h3, p {
+      margin: 10px 10px; // Ajusta según sea necesario
+    }
+
+    p{
+      text-align: justify;
+    }
+    ion-list {
+      width: 100%; // Ajusta para establecer el ancho deseado
+    }
+  }
+  
+
 @media (min-width: 769px) {
     .auth-form {
         width: 500px;

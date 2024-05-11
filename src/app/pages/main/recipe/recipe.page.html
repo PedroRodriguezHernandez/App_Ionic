@@ -1,9 +1,17 @@
-<app-header [title]="title"></app-header>
-<ion-content>
+<app-header [isRecipe]="true" [title]="title"></app-header>
+<ion-content class="publication-data">
     <img src="{{publication.image}}" />
-    <ion-list>
-        <ion-item *ngFor="let ingredient of ingredients | keyvalue ">
-            <ion-label><strong>{{ ingredient.key }}</strong>: {{ ingredient.value }}</ion-label>
-        </ion-item>
-    </ion-list>
+    <h3><strong>Tiempo: </strong> {{publication.time}} minutos</h3>
+    <h3><strong>Ingredientes</strong></h3>
+    <div class="scrollable-list">
+        <ion-list>
+            <ion-item *ngFor="let ingredient of ingredients | keyvalue ">
+                <ion-label><strong>{{ ingredient.key }}</strong>: {{ ingredient.value }}</ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+    <ion-text *ngFor="let step of publication.description; let i = index">
+        <h3><strong>Paso {{ i + 1 }}: </strong></h3>
+        <p>{{step}}</p>
+    </ion-text>
 </ion-content>

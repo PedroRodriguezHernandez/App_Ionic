@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
   }
 
   getPublication(){
-    let path = 'publicaction';
+    let path = 'publication';
     let subs = this.firebaseService.getCollectionData(path)
       .subscribe({
         next:(res:any)=>{

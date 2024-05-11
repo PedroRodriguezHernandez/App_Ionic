@@ -69,4 +69,18 @@ export class FirebaseService {
         return getDownloadURL(ref(getStorage(), path));
     });
   }
+
+  async getImage(imageName: string): Promise<string> {
+    const imageRef = ref(getStorage(), imageName);
+    return getDownloadURL(imageRef)
+      .then((url) => {
+        // URL de la imagen disponible aquí
+        return url;
+      })
+      .catch((error) => {
+        // Manejar cualquier error aquí
+        console.error("Error al obtener la URL de la imagen:", error);
+        return '';
+      });
+  }
 }
