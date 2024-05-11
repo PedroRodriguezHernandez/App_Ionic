@@ -10,8 +10,9 @@
             </ion-item>
         </ion-list>
     </div>
+    <h3><strong>Elaboración: </strong></h3>
     <ion-text *ngFor="let step of publication.description; let i = index">
-        <h3><strong>Paso {{ i + 1 }}: </strong></h3>
+        <h4><strong>Paso {{ i + 1 }}: </strong></h4>
         <p>{{step}}</p>
     </ion-text>
 </ion-content>
