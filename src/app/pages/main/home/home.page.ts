@@ -15,6 +15,7 @@ export class HomePage implements OnInit {
 
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
+
   router = inject(Router);
   products:Publication[] = [];
 
@@ -55,5 +56,9 @@ export class HomePage implements OnInit {
   goToRecipe(publication:Publication){
     this.utilsService.saveLocalStorage("recipe",publication);
     this.router.navigate(['/main/recipe'])
+  }
+
+  save(publication:Publication){
+
   }
 }
