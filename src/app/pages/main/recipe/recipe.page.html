@@ -1,4 +1,5 @@
-<app-header [isRecipe]="true" [title]="title"></app-header>
+<app-header [isSave]="isSave" [isRecipe]="!isSave" [title]="title"></app-header>
+
 <ion-content class="publication-data">
     <img src="{{publication.image}}" />
     <h3><strong>Tiempo: </strong> {{publication.time}} minutos</h3>

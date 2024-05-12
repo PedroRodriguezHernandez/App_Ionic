@@ -13,12 +13,16 @@ export class HeaderComponent  implements OnInit {
   @Input() backButton!:string;
   @Input() isModal!:boolean;
   @Input() isRecipe!:boolean;
+  @Input() isSave!:boolean;
+
 
   utilsService = inject(UtilsService);
   router = inject(Router);
 
   ngOnInit() {}
-
+  goSave(){
+    this.router.navigate(['/main/save']);
+  }
   goHome(){
     this.router.navigate(['/main/home']);
   }

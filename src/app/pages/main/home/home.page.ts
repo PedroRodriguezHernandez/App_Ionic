@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Publication } from 'src/app/models/publication.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { SqliteService } from 'src/app/services/sqlite.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
 
@@ -15,15 +16,20 @@ export class HomePage implements OnInit {
 
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
+  sqliteService = inject(SqliteService);
+
+
+  favorites:Publication[] = [];
 
   router = inject(Router);
-  products:Publication[] = [];
+  publications:Publication[] = [];
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
     this.getPublication();
+    this.read();
   }
 
   user(){
@@ -35,7 +41,7 @@ export class HomePage implements OnInit {
     let subs = this.firebaseService.getCollectionData(path)
       .subscribe({
         next:(res:any)=>{
-          this.products = res;
+          this.publications = res;
           subs.unsubscribe();
         }
     });
@@ -55,10 +61,52 @@ export class HomePage implements OnInit {
 
   goToRecipe(publication:Publication){
     this.utilsService.saveLocalStorage("recipe",publication);
-    this.router.navigate(['/main/recipe'])
+    this.router.navigate(['/main/recipe']);
   }
 
   save(publication:Publication){
+    this.sqliteService.create(publication)
+    .then(() => {
+      console.log("Creado");
+      this.read();
+    }).catch(err =>{
+      console.log(err);
+    });
+  }
 
+  read(){
+    this.sqliteService.read()
+    .then((publications:Publication []) =>{
+      this.favorites = this.createPublication(publications);
+      console.log(JSON.stringify(this.favorites));
+    });    
+  }
+
+  createPublication(publications:any[]){
+    let newPublicationList:Publication[] = [];
+    for(let publication of publications){
+
+      let newPublication:Publication ={
+        id: publication.id,
+        name: publication.name,
+        description: JSON.parse(publication.description),
+        time: publication.time,
+        ingredient: JSON.parse(publication.ingredient),
+        image: publication.image
+      };
+      console.log(JSON.stringify(newPublication));
+      
+      newPublicationList.push(newPublication);
+    }
+    return newPublicationList
+  }
+
+  isFavorite(publication:Publication) {
+    let item = this.favorites.find(elem => elem.id === publication.id);
+    let favorite: boolean = !!item;
+
+    if(favorite) console.log("isFavorite");
+
+    return favorite;
   }
 }

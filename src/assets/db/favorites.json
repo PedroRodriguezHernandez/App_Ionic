@@ -1,0 +1,37 @@
+{
+  "database": "favorites.db",
+  "version": 1,
+  "encrypted": false,
+  "mode": "full",
+  "tables": [
+    {
+      "name": "recipes",
+      "schema": [
+        {
+          "column": "id",
+          "value": "TEXT NOT NULL PRIMARY KEY"
+        },
+        {
+          "column": "name",
+          "value": "TEXT NOT NULL"
+        },
+        {
+          "column": "description",
+          "value": "TEXT NOT NULL"
+        },
+        {
+          "column": "time",
+          "value": "TEXT NOT NULL"
+        },
+        {
+          "column": "ingredient",
+          "value": "TEXT NOT NULL"
+        },
+        {
+          "column": "image",
+          "value": "TEXT NOT NULL"
+        }
+      ]
+    }
+  ]
+}

@@ -31,8 +31,6 @@ export class AppComponent {
       this.sqlite.dbReady.subscribe(load => {
         this.load = load;
       });
-      this.load = true;
-
     })
   }
 }

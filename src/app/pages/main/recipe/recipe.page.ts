@@ -17,12 +17,12 @@ export class RecipePage implements OnInit {
   title:string;
   image:string;
 
-
+  isSave: boolean;
   
   ngOnInit() {
     this.getPublication();
     console.log(this.publication);
-    
+    this.isSave = history.state.isSave ? history.state.isSave : false;
 
   }
 

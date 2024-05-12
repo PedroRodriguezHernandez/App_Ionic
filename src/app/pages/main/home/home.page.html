@@ -3,7 +3,7 @@
 <ion-content>
 
   <ion-list>
-    <ion-item-sliding class="publication-item" *ngFor="let p of products">
+    <ion-item-sliding class="publication-item" *ngFor="let p of publications">
         <ion-item (click)= "goToRecipe(p)">
           <ion-avatar slot="start">
             <img [src]="p.image" />
@@ -13,9 +13,14 @@
             <div class="data">{{p.time}} minutos</div>
 
           </ion-label>
+
+          <ion-badge slot="end" color="primary" *ngIf="isFavorite(p)">
+            Favorite
+          </ion-badge>
+
         </ion-item>
       <ion-item-options>
-        <ion-item-option (click)="save(p)">
+        <ion-item-option *ngIf="!isFavorite(p)" (click)="save(p)">
           <ion-icon class="option-btn" name="bookmark-outline"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -23,9 +28,5 @@
       
     </ion-item-sliding>
   </ion-list>
-  <!--ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addUpdatePublication()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab-->
+
 </ion-content>

@@ -22,4 +22,8 @@ export class MainPage implements OnInit {
     })
   }
 
+  logOut(){
+    this.router.navigate(["auth"]);
+  }
+
 }

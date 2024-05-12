@@ -8,7 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { defineCustomElements as jeepSqlite } from '@ionic/pwa-elements/loader';
+import { defineCustomElements as jeepSqlite } from 'jeep-sqlite/loader';
 
 //===Firebase===
 import {AngularFireModule} from '@angular/fire/compat'
