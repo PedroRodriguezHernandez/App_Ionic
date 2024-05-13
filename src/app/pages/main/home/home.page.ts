@@ -12,25 +12,23 @@ import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage{
+export class HomePage implements OnInit{
+
+  firebaseService = inject(FirebaseService);
+  utilsService = inject(UtilsService);
+  sqliteService = inject(SqliteService);
+  router = inject(Router);
 
   favorites:Publication[];
   publications:Publication[];
 
-  constructor(
-    private firebaseService: FirebaseService,
-    private utilsService: UtilsService,
-    private sqliteService: SqliteService,
-    private router: Router
-  ){
-    this.publications = [],
-    this.favorites = []
+  ngOnInit() {this.read();}
+  
+  ionViewWillEnter() {
+    this.getPublication();
+    this.read();
   }
 
-  async ionViewWillEnter() {
-    this.getPublication();
-    await this.read();
-  }
   user(){
     return this.utilsService.getLocalStorage('user');
   }
@@ -97,10 +95,18 @@ export class HomePage{
     return newPublicationList
   }
 
-  isFavorite(publication:Publication) {
+  isFavorite(publication:Publication) {    
     let item = this.favorites.find(elem => elem.id === publication.id);
     let favorite: boolean = !!item;
-
+    if(favorite) console.log(publication.name);
+    
     return favorite;
+  }
+
+  doRefresh(event: any){
+    setTimeout(() => {
+      this.read();
+      event.target.complete();
+    }, 2000);
   }
 }

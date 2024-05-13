@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Publication } from 'src/app/models/publication.model';
 import { SqliteService } from 'src/app/services/sqlite.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -22,7 +23,6 @@ export class HeaderComponent  implements OnInit {
   router = inject(Router);
   sqliteService = inject(SqliteService);
 
-
   favorites:Publication[] = [];
 
   currentPath: string = '';
@@ -39,7 +39,7 @@ export class HeaderComponent  implements OnInit {
   }
  
   goHome(){
-    this.router.navigate(['/main/home']);
+    this.router.navigate(['home']);
   }
  
   dismissModal(){

@@ -25,11 +25,7 @@ export class SavePage implements OnInit {
 
   ngOnInit() {
   }
-
-  ionViewDidEnter(){
-    this.read();
-  }
-
+  
   ionViewWillEnter() {
     this.read();
   }
@@ -78,4 +74,12 @@ export class SavePage implements OnInit {
     console.error(err);
   })
   }
+
+  doRefresh(event: any){
+    setTimeout(() => {
+      this.read();
+      event.target.complete();
+    }, 2000);
+  }
+  
 }
