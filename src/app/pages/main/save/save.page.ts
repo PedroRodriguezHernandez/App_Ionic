@@ -24,7 +24,10 @@ export class SavePage implements OnInit {
   publications:Publication[] = [];
 
   ngOnInit() {
-    //this.read();
+  }
+
+  ionViewDidEnter(){
+    this.read();
   }
 
   ionViewWillEnter() {

@@ -10,6 +10,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./recipe.page.scss'],
 })
 export class RecipePage implements OnInit {
+  
   firebaseService = inject(FirebaseService);
   utilService = inject(UtilsService);
   publication: Publication;
@@ -21,9 +22,7 @@ export class RecipePage implements OnInit {
   
   ngOnInit() {
     this.getPublication();
-    console.log(this.publication);
     this.isSave = history.state.isSave ? history.state.isSave : false;
-
   }
 
   async getPublication(){

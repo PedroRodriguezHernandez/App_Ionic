@@ -12,26 +12,25 @@ import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage{
 
-  firebaseService = inject(FirebaseService);
-  utilsService = inject(UtilsService);
-  sqliteService = inject(SqliteService);
+  favorites:Publication[];
+  publications:Publication[];
 
-
-  favorites:Publication[] = [];
-
-  router = inject(Router);
-  publications:Publication[] = [];
-
-  ngOnInit() {
+  constructor(
+    private firebaseService: FirebaseService,
+    private utilsService: UtilsService,
+    private sqliteService: SqliteService,
+    private router: Router
+  ){
+    this.publications = [],
+    this.favorites = []
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.getPublication();
-    this.read();
+    await this.read();
   }
-
   user(){
     return this.utilsService.getLocalStorage('user');
   }
@@ -66,23 +65,22 @@ export class HomePage implements OnInit {
 
   save(publication:Publication){
     this.sqliteService.create(publication)
-    .then(() => {
+    .then(async () => {
       console.log("Creado");
-      this.read();
+      await this.read();
     }).catch(err =>{
       console.log(err);
     });
   }
 
-  read(){
+  async read(){
     this.sqliteService.read()
-    .then((publications:Publication []) =>{
-      this.favorites = this.createPublication(publications);
-      console.log(JSON.stringify(this.favorites));
+    .then(async (publications:Publication []) =>{
+      this.favorites = await this.createPublication(publications);
     });    
   }
 
-  createPublication(publications:any[]){
+  async createPublication(publications:any[]){
     let newPublicationList:Publication[] = [];
     for(let publication of publications){
 
@@ -93,9 +91,7 @@ export class HomePage implements OnInit {
         time: publication.time,
         ingredient: JSON.parse(publication.ingredient),
         image: publication.image
-      };
-      console.log(JSON.stringify(newPublication));
-      
+      };      
       newPublicationList.push(newPublication);
     }
     return newPublicationList
@@ -104,8 +100,6 @@ export class HomePage implements OnInit {
   isFavorite(publication:Publication) {
     let item = this.favorites.find(elem => elem.id === publication.id);
     let favorite: boolean = !!item;
-
-    if(favorite) console.log("isFavorite");
 
     return favorite;
   }

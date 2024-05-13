@@ -1,23 +1,27 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
-      
-      <ion-button (click)="goHome()" *ngIf="isRecipe">
-        <ion-icon name="arrow-undo-outline"></ion-icon>
-      </ion-button>
-      
-      <ion-button (click)="goSave()" *ngIf="isSave">
-        <ion-icon name="arrow-undo-outline"></ion-icon>
-      </ion-button>
 
-      <ion-button (click)="dismissModal()" *ngIf="isModal">
-        <ion-icon name="close-circle-outline"></ion-icon>
-      </ion-button>
+      <ion-back-button *ngIf="isRecipe" defaultHref="home"></ion-back-button>
+      <ion-back-button *ngIf="isSave" defaultHref="save"></ion-back-button>
+
     </ion-buttons>
+
+    <ion-button (click)="dismissModal()" *ngIf="isModal">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
 
     <ion-title>
       <strong>{{title}}</strong>
-  </ion-title>
+    </ion-title>
+
+    <ion-button (click)="delete()" slot="end" *ngIf="showRecipe() && isFavorite()">
+      <ion-icon name="bookmark"></ion-icon>
+    </ion-button>
+
+    <ion-button (click)="save()" slot="end" *ngIf="showRecipe() && !isFavorite()">
+      <ion-icon name="bookmark-outline"></ion-icon>
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
