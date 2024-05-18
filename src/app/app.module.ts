@@ -23,9 +23,9 @@ jeepSqlite(window)
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     CommonModule,
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
@@ -40,3 +40,5 @@ jeepSqlite(window)
   ]
 })
 export class AppModule {}
+
+
