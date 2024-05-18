@@ -25,7 +25,7 @@ export class SavePage implements OnInit {
 
   ngOnInit() {
   }
-  
+
   ionViewWillEnter() {
     this.read();
   }
@@ -40,7 +40,7 @@ export class SavePage implements OnInit {
     .then((publications:Publication []) =>{
       this.publications = this.createPublication(publications);
       //console.log(JSON.stringify(this.favorites));
-    });    
+    });
   }
 
   createPublication(publications:any[]){
@@ -56,7 +56,7 @@ export class SavePage implements OnInit {
         image: publication.image
       };
       console.log(JSON.stringify(newPublication));
-      
+
       newPublicationList.push(newPublication);
     }
     return newPublicationList
@@ -81,5 +81,7 @@ export class SavePage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-  
+
 }
+
+
