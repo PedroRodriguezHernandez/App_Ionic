@@ -137,12 +137,12 @@ export class SqliteService {
     const ingredientJson = JSON.stringify(publication.ingredient);
     // Convertimos description a una cadena JSON si es un array
     const descriptionJson = JSON.stringify(publication.description);
-  
+
     // Sentencia para insertar un registro
     let sql = 'INSERT INTO recipes(id, name, description, time, ingredient, image) VALUES(?, ?, ?, ?, ?, ?)';
     // Obtengo la base de datos
     const dbName = await this.getDbName();
-  
+
     // Ejecutamos la sentencia
     return CapacitorSQLite.executeSet({
       database: dbName,
@@ -174,7 +174,6 @@ export class SqliteService {
     // Obtengo la base de datos
     const dbName = await this.getDbName();
 
-    // Ejecutamos la sentencia
     return CapacitorSQLite.query({
       database: dbName,
       statement: sql,
@@ -225,3 +224,4 @@ export class SqliteService {
     }).catch(err => Promise.reject(err))
   }
 }
+
